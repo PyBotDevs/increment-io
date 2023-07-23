@@ -266,15 +266,16 @@ async def setchannel(ctx: ApplicationContext):
     name="reactions",
     description="Choose whether you want bot reactions enabled or not."
 )
+@option(name="value", description="Choose a setting value", type=str, choices=["on", "off"])
 @commands.has_permissions(administrator = True)
-async def reactions(ctx: ApplicationContext, setting: str):
-    if setting == 'on':
+async def reactions(ctx: ApplicationContext, value: str):
+    if value == 'on':
         if autoreactions[str(ctx.guild.id)] == 1: await ctx.send(':warning: This feature is already enabled.')
         else:
             autoreactions[str(ctx.guild.id)] = 1
             savedata()
             await ctx.send(f':white_check_mark: Turned **on** count reactions.')
-    elif setting == 'off':
+    elif value == 'off':
         if autoreactions[str(ctx.guild.id)] == 0: await ctx.send(':warning: This feature is already disabled')
         else:
             autoreactions[str(ctx.guild.id)] = 0
@@ -286,10 +287,11 @@ async def reactions(ctx: ApplicationContext, setting: str):
     name="setnumber",
     description="Set the current count to a new value."
 )
-async def setnumber(ctx: ApplicationContext, arg1: int):
-    if arg1 < 1: raise(discord.ext.commands.BadArgument)
+@option(name="new_count", description="What do you want to set the count to?", type=int)
+async def setnumber(ctx: ApplicationContext, new_count: int):
+    if new_count < 1: raise(discord.ext.commands.BadArgument)
     else:
-        count[str(ctx.channel.id)] = arg1
+        count[str(ctx.channel.id)] = new_count
         savedata()
         await ctx.reply(f':white_check_mark: Count set to `{count[str(ctx.channel.id)]}`')
 
