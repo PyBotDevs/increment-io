@@ -216,7 +216,7 @@ async def uptime(ctx: ApplicationContext):
     description="Need help?"
 )
 async def help(ctx: ApplicationContext):
-    emb = discord.Embed(title=f'increment.io Commands',  description=f'I am a counting bot who looks for numbers and makes sure that the count doesn\'t get messed up. If you want help on commands or want a more organized view, check https://notsniped.github.io/increment.io/commands\n :warning: This bot is still WIP. Some commands/features may not work as expected.\n\n**Prefix:** ```Main Prefix: +```\n**Information:** ```+help, +ping, +stats, +serverstats,+credits```\n**Counting:** ```+setchannel, +numberonly [on/off], +reactions [on/off], +setnumber [number], +resetcount```', color=theme_color)
+    emb = discord.Embed(title=f'increment.io Commands',  description=f'I am a counting bot who looks for numbers and makes sure that the count doesn\'t get messed up. If you want help on commands or want a more organized view, check https://notsniped.github.io/increment.io/commands\n :warning: This bot is still WIP. Some commands/features may not work as expected.\n\n**Prefix:** `/`\n**Information:** ```/help, /ping, /stats, /serverstats, /credits```\n**Counting:** ```/setchannel, /numberonly [on/off], /reactions [on/off], /setnumber [number], /resetcount```', color=theme_color)
     await ctx.send(embed = emb)
 
 @client.slash_command(
