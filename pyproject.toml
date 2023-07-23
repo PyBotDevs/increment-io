@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "increment-io"
+version = "v2023.723.0"
+description = "An extremely simple, yet functional counting Discord bot."
+authors = ["snipe_blaze <72265661+notsniped@users.noreply.github.com>"]
+license = "GPL-3.0"
+readme = "README.md"
+packages = [{include = "increment_io"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+py-cord = "^2.4.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
