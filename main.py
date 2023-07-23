@@ -203,27 +203,42 @@ async def on_message(message):
     await client.process_commands(message)
 
 # Commands
-@client.command()
+@client.slash_command(
+    name="uptime",
+    description="See the bot's current session uptime."
+)
 async def uptime(ctx: ApplicationContext):
     uptime = str(datetime.timedelta(seconds=int(round(time.time()-startTime))))
     await ctx.send(f'This session has been running for **{uptime}**')
 
-@client.command(aliases=['commands'])
+@client.slash_command(
+    name="help",
+    description="Need help?"
+)
 async def help(ctx: ApplicationContext):
     emb = discord.Embed(title=f'increment.io Commands',  description=f'I am a counting bot who looks for numbers and makes sure that the count doesn\'t get messed up. If you want help on commands or want a more organized view, check https://notsniped.github.io/increment.io/commands\n :warning: This bot is still WIP. Some commands/features may not work as expected.\n\n**Prefix:** ```Main Prefix: +```\n**Information:** ```+help, +ping, +stats, +serverstats,+credits```\n**Counting:** ```+setchannel, +numberonly [on/off], +reactions [on/off], +setnumber [number], +resetcount```', color=theme_color)
     await ctx.send(embed = emb)
 
-@client.command(aliases=['pong'])
+@client.slash_command(
+    name="ping",
+    description="View the bot latency (in ms)"
+)
 async def ping(ctx: ApplicationContext):
     await ctx.send(f':ping_pong: Pong! In **{round(client.latency * 1000)}ms**.')
 
-@client.command()
+@client.slash_command(
+    name="credits",
+    description="View the people behind this bot's development."
+)
 async def credits(ctx: ApplicationContext):
     emb = discord.Embed(title='Bot Credits', description='Owner: <@!738290097170153472>\nHelpers: <@!706697300872921088>, <@!705462972415213588>',color=theme_color)
     emb.set_footer(text='increment.io >> https://notsniped.github.io/increment.io')
     await ctx.send(embed=emb)
 
-@client.command()
+@client.slash_command(
+    name="serverstats",
+    description="View counting stats for this server."
+)
 async def serverstats(ctx: ApplicationContext):
     servericon = ctx.guild.icon_url
     setchannelstats = countchannel[str(ctx.guild.id)]
@@ -235,7 +250,10 @@ async def serverstats(ctx: ApplicationContext):
     await ctx.send(embed = emb12)
 
 # Count Commands
-@client.command()
+@client.slash_command(
+    name="setchannel",
+    description="Sets this channel as the server's counting channel."
+)
 @commands.has_permissions(administrator = True)
 async def setchannel(ctx: ApplicationContext):
     try:
@@ -244,7 +262,10 @@ async def setchannel(ctx: ApplicationContext):
         await ctx.send(f':white_check_mark: <#{channel_to_set}> set as counting channel.')
     except: await ctx.send(':x: Unable to set count channel. Try again later.')
 
-@client.command()
+@client.slash_command(
+    name="reactions",
+    description="Choose whether you want bot reactions enabled or not."
+)
 @commands.has_permissions(administrator = True)
 async def reactions(ctx: ApplicationContext, setting: str):
     if setting == 'on':
@@ -261,7 +282,10 @@ async def reactions(ctx: ApplicationContext, setting: str):
             await ctx.send(f':white_check_mark: Turned **off** count reactions.')
     else: await ctx.send(f'\'{setting}\' is not a valid option. You can choose between `on` and `off`')
 
-@client.command(aliases=['setnum'])
+@client.slash_command(
+    name="setnumber",
+    description="Set the current count to a new value."
+)
 async def setnumber(ctx: ApplicationContext, arg1: int):
     if arg1 < 1: raise(discord.ext.commands.BadArgument)
     else:
@@ -269,7 +293,10 @@ async def setnumber(ctx: ApplicationContext, arg1: int):
         savedata()
         await ctx.reply(f':white_check_mark: Count set to `{count[str(ctx.channel.id)]}`')
 
-@client.command(aliases=['resetnumber', 'reset', 'resetnum'])
+@client.slash_command(
+    name="resetcount",
+    description="Reset the current count."
+)
 async def resetcount(ctx):
     count[str(ctx.channel.id)] = 1
     savedata()
