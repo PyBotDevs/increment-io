@@ -6,6 +6,7 @@ import discord
 import datetime
 import requests
 import json
+from discord import option, ApplicationContext
 from discord.ext import commands
 from discord.ext.commands import *
 from discord.ext import tasks
@@ -36,7 +37,7 @@ if os.name == 'nt': os.system('cls')
 else: os.system('clear')
 owner = '@notsniped'
 homedir = os.path.expanduser("~")
-client = commands.Bot(command_prefix="+", intents=intents)
+client = discord.Bot()
 global startTime
 startTime = time.time()
 client.remove_command('help')
