@@ -98,13 +98,9 @@ async def on_ready():
     print('------------------')
     print(f'Server count: {str(len(client.guilds))}')
     print('------------------')
-    if bool(log) == True:
-        print(f'Logging: {colors.green}{log}{colors.end}')
-        print('==================')
-    else:
-        print(f'Logging: {colors.red}{log}{colors.end}')
-        print('==================')
-        pass
+    if log: print(f'Logging: {colors.green}{log}{colors.end}')
+    else: print(f'Logging: {colors.red}{log}{colors.end}')
+    print('==================')
     print('Bot admins')
     print('------------------')
     print(colors.cyan)
