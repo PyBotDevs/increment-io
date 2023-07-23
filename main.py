@@ -20,25 +20,20 @@ ids = [
 ]
 console = False
 log = True
-if os.name == 'nt':
-    os.system('cls')
-else:
-    os.system('clear')
+if os.name == 'nt': os.system('cls')
+else: os.system('clear')
 print('Checking for rate limit errors...')
 r = requests.head(url="https://discord.com/api/v1")
 try:
     print(f"Rate limit error found: {int(r.headers['Retry-After']) / 60} minutes left")
     raise(SystemExit)
-except:
-    print("No rate limit found.")
+except: print("No rate limit found.")
 time.sleep(1)
 intents = discord.Intents.all()
 errHandlerVer = 'v2.4'
 botVer = 'v1.0'
-if os.name == 'nt':
-    os.system('cls')
-else:
-    os.system('clear')
+if os.name == 'nt': os.system('cls')
+else: os.system('clear')
 owner = '@notsniped'
 homedir = os.path.expanduser("~")
 client = commands.Bot(command_prefix="+", intents=intents)
@@ -59,26 +54,15 @@ class colors:
     green = '\033[92m'
     end = '\033[0m'
 
-with open('database/count.json', 'r') as f:
-    global count
-    count = json.load(f)
-with open('database/configuration/countchannel.json', 'r') as f:
-    global countchannel
-    countchannel = json.load(f)
-with open('database/configuration/warning.json', 'r') as f:
-    global warnmsg
-    warnmsg = json.load(f)
-with open('database/configuration/autoreactions.json', 'r') as f:
-    global autoreactions
-    autoreactions = json.load(f)
+with open('database/count.json', 'r') as f: count = json.load(f)
+with open('database/configuration/countchannel.json', 'r') as f: countchannel = json.load(f)
+with open('database/configuration/warning.json', 'r') as f: warnmsg = json.load(f)
+with open('database/configuration/autoreactions.json', 'r') as f: autoreactions = json.load(f)
 
 def savedata():
-    with open('database/count.json', 'w+') as f:
-        json.dump(count, f)
-    with open('database/configuration/countchannel.json', 'w+') as f:
-        json.dump(countchannel, f)
-    with open('database/configuration/autoreactions.json', 'w+') as f:
-        json.dump(autoreactions, f)
+    with open('database/count.json', 'w+') as f: json.dump(count, f)
+    with open('database/configuration/countchannel.json', 'w+') as f: json.dump(countchannel, f)
+    with open('database/configuration/autoreactions.json', 'w+') as f: json.dump(autoreactions, f)
 
 def get_time():
     now = datetime.datetime.now()
@@ -87,10 +71,8 @@ def get_time():
 # Events
 @client.event
 async def on_ready():
-    if os.name == 'nt':
-        os.system('cls')
-    else:
-        os.system('clear')
+    if os.name == 'nt': os.system('cls')
+    else: os.system('clear')
     await client.change_presence(activity=discord.Activity(type=discord.ActivityType.playing, name=f"the epic comeback. (+help) | {str(len(client.guilds))} guilds"))
     print('Bot is online')
     print('==================')
@@ -119,8 +101,7 @@ async def on_ready():
     print('Bot admins')
     print('------------------')
     print(colors.cyan)
-    for id in ids:
-        print(id)
+    for id in ids: print(id)
     print(colors.end)
     print('==================')
     print('System info')
@@ -156,8 +137,7 @@ async def on_command_error(ctx, error):
                 f.write(f'[{current_time}/WARN] Ignoring exception at CommandNotFound. Details: This command does not exist.\n')
                 f.close()
                 print(f'{colors.red}[{current_time}/WARN] Ignoring exception at CommandNotFound. Details: This command does not exist.{colors.end}')
-        else:
-            pass
+        else: pass
     if isinstance(error, discord.ext.commands.CommandOnCooldown):
         await ctx.send(f':warning: This command is currently on cooldown, try after **{str(datetime.timedelta(seconds=int(round(error.retry_after))))}**', delete_after=5)
         if os.name == 'nt':
@@ -165,8 +145,7 @@ async def on_command_error(ctx, error):
                 f.write(f'[{current_time}/WARN] Ignoring exception at CommandOnCooldown. Details: This command is currently on cooldown.\n')
                 f.close()
                 print(f'{colors.red}[{current_time}/WARN] Ignoring exception at CommandOnCooldown. Details: This command is currently on cooldown.{colors.end}')
-        else:
-            pass
+        else: pass
     if isinstance(error, discord.ext.commands.MissingRequiredArgument):
         await ctx.send(':x: Your command has missing required argument(s).', delete_after=3)
         if os.name == 'nt':
@@ -174,8 +153,7 @@ async def on_command_error(ctx, error):
                 f.write(f'[{current_time}/WARN] Ignoring exception at MissingRequiredArgument. Details: The command can\'t be executed because required arguments are missing.\n')
                 f.close()
                 print(f'{colors.red}[{current_time}/WARN] Ignoring exception at MissingRequiredArgument. Details: The command can\'t be executed because required arguments are missing.{colors.end}')
-        else:
-            pass
+        else: pass
     if isinstance(error, discord.ext.commands.MissingPermissions):
         await ctx.send(':x: You don\'t have permissions to use this command.', delete_after=3)
         if os.name == 'nt':
@@ -183,8 +161,7 @@ async def on_command_error(ctx, error):
                 f.write(f'[{current_time}/WARN] Ignoring exception at MissingPermissions. Details: The user doesn\'t have the required permissions.\n')
                 f.close()
                 print(f'{colors.red}[{current_time}/WARN] Ignoring exception at MissingPermissions. Details: The user doesn\'t have the required permissions.{colors.end}')
-        else:
-            pass
+        else: pass
     if isinstance(error, discord.ext.commands.BadArgument):
         await ctx.send(':x: Invalid argument.', delete_after=3)
         if os.name == 'nt':
@@ -192,8 +169,7 @@ async def on_command_error(ctx, error):
                 f.write(f'[{current_time}/WARN] Ignoring exception at BadArgument.\n')
                 f.close()
                 print(f'{colors.red}[{current_time}/WARN] Ignoring exception at BadArgument.{colors.end}')
-        else:
-            pass
+        else: pass
     if isinstance(error, discord.ext.commands.BotMissingPermissions):
         await ctx.send(':x: I don\'t have permissions to do this. Kindly manage my role permissions to get this feature working.')
         if os.name == 'nt':
@@ -201,8 +177,7 @@ async def on_command_error(ctx, error):
                 f.write(f'[{current_time}/WARN] Ignoring exception at BotMissingPermissions.\n Details: The bot doesn\'t have the required permissions.\n')
                 f.close()
                 print(f'{colors.red}[{current_time}/WARN] Ignoring exception at BotMissingPremissions. Details: The bot doesn\'t have the required permissions.{colors.end}')
-        else:
-            pass
+        else: pass
 
 snipe_message_author = {}
 snipe_message_content = {}
