@@ -185,20 +185,16 @@ snipe_message_content = {}
 @client.event
 async def on_message(message):
     global count
-    if str(message.channel.id) in count: pass
-    else:
+    if str(message.channel.id) not in count:
         count[str(message.channel.id)] = 1
         savedata()
-    if str(message.guild.id) in countchannel: pass
-    else:
+    if str(message.guild.id) not in countchannel:
         countchannel[str(message.guild.id)] = 0
         savedata()
-    if str(message.guild.id) in warnmsg: pass
-    else:
+    if str(message.guild.id) not in warnmsg:
         warnmsg[str(message.guild.id)] = 0
         savedata()
-    if str(message.guild.id) in autoreactions: pass
-    else:
+    if str(message.guild.id) not in autoreactions:
         autoreactions[str(message.guild.id)] = 1
         savedata()
     if not message.author.bot:
@@ -207,17 +203,12 @@ async def on_message(message):
                 if int(message.content) == count[str(message.channel.id)]:
                     count[str(message.channel.id)] += 1
                     if autoreactions[str(message.guild.id)] == 1: await message.add_reaction('☑')
-                    else: pass
                     savedata()
                 else:
                     if autoreactions[str(message.guild.id)] == 1: await message.add_reaction('❌')
-                    else: pass
                     await message.reply(f'**Wrong!** The next number is `{count[str(message.channel.id)]}`', mention_author = False, delete_after = 3)
             except:
                 if autoreactions[str(message.guild.id)] == 1: await message.add_reaction('⚠')
-                else: pass
-        else: pass
-    else: pass
     await client.process_commands(message)
 
 # Commands
@@ -256,9 +247,8 @@ async def serverstats(ctx):
 @client.command()
 @commands.has_permissions(administrator = True)
 async def setchannel(ctx):
-    channel_to_set = ctx.channel.id
     try:
-      countchannel[str(ctx.guild.id)] = channel_to_set
+      countchannel[str(ctx.guild.id)] = ctx.channel.id
       savedata()
       await ctx.send(f':white_check_mark: <#{channel_to_set}> set as counting channel.')
     except: await ctx.send(':x: Unable to set count channel. Try again later.')
