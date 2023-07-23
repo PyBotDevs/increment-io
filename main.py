@@ -1,4 +1,4 @@
-### Modules ###
+# Imports
 import os
 import time
 import os.path
@@ -10,9 +10,8 @@ import json
 from discord.ext import commands
 from discord.ext.commands import *
 from discord.ext import tasks
-### Modules end ###
 
-### Startup/variables ###
+# Startup and Variables
 ids = [
     816941773032390676,
     738290097170153472,
@@ -46,17 +45,12 @@ client = commands.Bot(command_prefix="+", intents=intents)
 global startTime
 startTime = time.time()
 client.remove_command('help')
-### Startup\\variables end ###
-
-### Command variables ###
 theme_color = 0xffbd59
 color_success = 0x77b255
 color_fail = 0xc92424
 rootdir = 'C://Users//dhruvbhat//OneDrive//Desktop//increment.io'
 loggerHandler_path = 'botLog/log.txt'
 errorHandler_path = 'botLog/errors.txt'
-### Functions and classes ###
-
 correctnumber = {}
 
 class colors:
@@ -90,9 +84,7 @@ def get_time():
     now = datetime.datetime.now()
     return now.strftime("%H:%M:%S")
 
-### Functions and classes end ###
-
-## Events ###
+# Events
 @client.event
 async def on_ready():
     if os.name == 'nt':
@@ -153,7 +145,7 @@ async def on_ready():
                 print('Bot file size: ' + os.path.getsize(str(os.getcwd() + '\\main.py')))
                 print('------------------')
 
-# Error handler #
+# Error Handler
 @client.event
 async def on_command_error(ctx, error):
     now = datetime.datetime.now()
@@ -211,7 +203,6 @@ async def on_command_error(ctx, error):
                 print(f'{colors.red}[{current_time}/WARN] Ignoring exception at BotMissingPremissions. Details: The bot doesn\'t have the required permissions.{colors.end}')
         else:
             pass
-# Error handler end #
 
 snipe_message_author = {}
 snipe_message_content = {}
@@ -254,10 +245,7 @@ async def on_message(message):
     else: pass
     await client.process_commands(message)
 
-### Events end ###
-
-### Commands ###
-
+# Commands
 @client.command()
 async def uptime(ctx):
     uptime = str(datetime.timedelta(seconds=int(round(time.time()-startTime))))
@@ -289,10 +277,7 @@ async def serverstats(ctx):
     emb12.set_thumbnail(url=servericon)
     await ctx.send(embed = emb12)
 
-## Moderation Commands End ##
-
-## Count Commands ##
-
+# Count Commands
 @client.command()
 @commands.has_permissions(administrator = True)
 async def setchannel(ctx):
@@ -334,8 +319,6 @@ async def resetcount(ctx):
     savedata()
     await ctx.reply(':white_check_mark: Count successfully reset back to `1`')
 
-## Count Commands End ##
-
-### Commands end ###
+# Client initialization
 keep_alive()
 client.run('')  # Insert your bot token here
