@@ -272,11 +272,11 @@ async def reactions(ctx, setting:str):
 
 @client.command(aliases=['setnum'])
 async def setnumber(ctx, arg1:int):
-  if arg1 < 1: raise(discord.ext.commands.BadArgument)
-  else:
-    count[str(ctx.channel.id)] = arg1
-    savedata()
-    await ctx.reply(f':white_check_mark: Count set to `{count[str(ctx.channel.id)]}`')
+    if arg1 < 1: raise(discord.ext.commands.BadArgument)
+    else:
+        count[str(ctx.channel.id)] = arg1
+        savedata()
+        await ctx.reply(f':white_check_mark: Count set to `{count[str(ctx.channel.id)]}`')
 
 @client.command(aliases=['resetnumber', 'reset', 'resetnum'])
 async def resetcount(ctx):
