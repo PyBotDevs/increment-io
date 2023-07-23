@@ -248,9 +248,9 @@ async def serverstats(ctx):
 @commands.has_permissions(administrator = True)
 async def setchannel(ctx):
     try:
-      countchannel[str(ctx.guild.id)] = ctx.channel.id
-      savedata()
-      await ctx.send(f':white_check_mark: <#{channel_to_set}> set as counting channel.')
+        countchannel[str(ctx.guild.id)] = ctx.channel.id
+        savedata()
+        await ctx.send(f':white_check_mark: <#{channel_to_set}> set as counting channel.')
     except: await ctx.send(':x: Unable to set count channel. Try again later.')
 
 @client.command()
