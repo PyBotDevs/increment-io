@@ -115,19 +115,6 @@ async def on_ready():
     print('Current working dir: ' + str(os.getcwd()))
     print(f'System directory: {homedir}')
     print('------------------')
-    try:
-        botpath = 'main.py'
-        botsize = os.path.getsize(botpath)
-        print(f'Bot file size: {botsize}b')
-        print('------------------')
-    except FileNotFoundError:
-        if os.name == 'posix':
-            try:
-                print('Bot file size: ' + os.path.getsize('main.py'))
-                print('------------------')
-            except FileNotFoundError:
-                print('Bot file size: ' + os.path.getsize(str(os.getcwd() + '\\main.py')))
-                print('------------------')
 
 # Error Handler
 @client.event
