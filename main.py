@@ -73,14 +73,21 @@ def get_time():
 async def on_ready():
     if os.name == 'nt': os.system('cls')
     else: os.system('clear')
-    await client.change_presence(activity=discord.Activity(type=discord.ActivityType.playing, name=f"the epic comeback. (+help) | {str(len(client.guilds))} guilds"))
+    await client.change_presence(
+        activity=discord.Activity(
+            type=discord.ActivityType.playing,
+            name=f"the epic comeback. (+help) | {str(len(client.guilds))} guilds"
+        )
+    )
     print('Bot is online')
     print('==================')
     print('------------------')
     print('Bot Info')
     print(f'Bot version: {colors.cyan}{botVer}{colors.end}')
     print(f'Error handler version: {colors.cyan}{errHandlerVer}{colors.end}')
-    print(f'Username: {colors.green}{client.user.name}{colors.end}\nId: {colors.green}{client.user.id}{colors.end}\nDeveloper name: {colors.green}{owner}{colors.end}')
+    print(f"Username: {colors.green}{client.user.name}{colors.end}")
+    print(f"Bot id: {colors.green}{client.user.id}{colors.end}")
+    print(f"Developer name: {colors.green}{owner}{colors.end}")
     print('==================')
     print('Bot config:')
     print('------------------')
