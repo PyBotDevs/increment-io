@@ -53,8 +53,8 @@ theme_color = 0xffbd59
 color_success = 0x77b255
 color_fail = 0xc92424
 rootdir = 'C://Users//dhruvbhat//OneDrive//Desktop//increment.io'
-loggerHandler_path = f'botLog/log.txt'
-errorHandler_path = f'botLog/errors.txt'
+loggerHandler_path = 'botLog/log.txt'
+errorHandler_path = 'botLog/errors.txt'
 ### Functions and classes ###
 
 correctnumber = {}
@@ -65,25 +65,25 @@ class colors:
     green = '\033[92m'
     end = '\033[0m'
 
-with open(f'database/count.json', 'r') as f:
+with open('database/count.json', 'r') as f:
     global count
     count = json.load(f)
-with open(f'database/configuration/countchannel.json', 'r') as f:
+with open('database/configuration/countchannel.json', 'r') as f:
     global countchannel
     countchannel = json.load(f)
-with open(f'database/configuration/warning.json', 'r') as f:
+with open('database/configuration/warning.json', 'r') as f:
     global warnmsg
     warnmsg = json.load(f)
-with open(f'database/configuration/autoreactions.json', 'r') as f:
+with open('database/configuration/autoreactions.json', 'r') as f:
     global autoreactions
     autoreactions = json.load(f)
 
 def savedata():
-    with open(f'database/count.json', 'w+') as f:
+    with open('database/count.json', 'w+') as f:
         json.dump(count, f)
-    with open(f'database/configuration/countchannel.json', 'w+') as f:
+    with open('database/configuration/countchannel.json', 'w+') as f:
         json.dump(countchannel, f)
-    with open(f'database/configuration/autoreactions.json', 'w+') as f:
+    with open('database/configuration/autoreactions.json', 'w+') as f:
         json.dump(autoreactions, f)
 
 def get_time():
@@ -307,13 +307,13 @@ async def setchannel(ctx):
 @commands.has_permissions(administrator = True)
 async def reactions(ctx, setting:str):
     if setting == 'on':
-        if autoreactions[str(ctx.guild.id)] == 1: await ctx.send(f':warning: This feature is already enabled.')
+        if autoreactions[str(ctx.guild.id)] == 1: await ctx.send(':warning: This feature is already enabled.')
         else:
             autoreactions[str(ctx.guild.id)] = 1
             savedata()
             await ctx.send(f':white_check_mark: Turned **on** count reactions.')
     elif setting == 'off':
-        if autoreactions[str(ctx.guild.id)] == 0: await ctx.send(f':warning: This feature is already disabled')
+        if autoreactions[str(ctx.guild.id)] == 0: await ctx.send(':warning: This feature is already disabled')
         else:
             autoreactions[str(ctx.guild.id)] = 0
             savedata()
