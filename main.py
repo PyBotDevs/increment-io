@@ -204,27 +204,27 @@ async def on_message(message):
 
 # Commands
 @client.command()
-async def uptime(ctx):
+async def uptime(ctx: ApplicationContext):
     uptime = str(datetime.timedelta(seconds=int(round(time.time()-startTime))))
     await ctx.send(f'This session has been running for **{uptime}**')
 
 @client.command(aliases=['commands'])
-async def help(ctx):
+async def help(ctx: ApplicationContext):
     emb = discord.Embed(title=f'increment.io Commands',  description=f'I am a counting bot who looks for numbers and makes sure that the count doesn\'t get messed up. If you want help on commands or want a more organized view, check https://notsniped.github.io/increment.io/commands\n :warning: This bot is still WIP. Some commands/features may not work as expected.\n\n**Prefix:** ```Main Prefix: +```\n**Information:** ```+help, +ping, +stats, +serverstats,+credits```\n**Counting:** ```+setchannel, +numberonly [on/off], +reactions [on/off], +setnumber [number], +resetcount```', color=theme_color)
     await ctx.send(embed = emb)
 
 @client.command(aliases=['pong'])
-async def ping(ctx):
+async def ping(ctx: ApplicationContext):
     await ctx.send(f':ping_pong: Pong! In **{round(client.latency * 1000)}ms**.')
 
 @client.command()
-async def credits(ctx):
+async def credits(ctx: ApplicationContext):
     emb = discord.Embed(title='Bot Credits', description='Owner: <@!738290097170153472>\nHelpers: <@!706697300872921088>, <@!705462972415213588>',color=theme_color)
     emb.set_footer(text='increment.io >> https://notsniped.github.io/increment.io')
     await ctx.send(embed=emb)
 
 @client.command()
-async def serverstats(ctx):
+async def serverstats(ctx: ApplicationContext):
     servericon = ctx.guild.icon_url
     setchannelstats = countchannel[str(ctx.guild.id)]
     setchannelmaxcount = count[setchannelstats]
@@ -237,7 +237,7 @@ async def serverstats(ctx):
 # Count Commands
 @client.command()
 @commands.has_permissions(administrator = True)
-async def setchannel(ctx):
+async def setchannel(ctx: ApplicationContext):
     try:
         countchannel[str(ctx.guild.id)] = ctx.channel.id
         savedata()
@@ -246,7 +246,7 @@ async def setchannel(ctx):
 
 @client.command()
 @commands.has_permissions(administrator = True)
-async def reactions(ctx, setting:str):
+async def reactions(ctx: ApplicationContext, setting: str):
     if setting == 'on':
         if autoreactions[str(ctx.guild.id)] == 1: await ctx.send(':warning: This feature is already enabled.')
         else:
@@ -262,7 +262,7 @@ async def reactions(ctx, setting:str):
     else: await ctx.send(f'\'{setting}\' is not a valid option. You can choose between `on` and `off`')
 
 @client.command(aliases=['setnum'])
-async def setnumber(ctx, arg1:int):
+async def setnumber(ctx: ApplicationContext, arg1: int):
     if arg1 < 1: raise(discord.ext.commands.BadArgument)
     else:
         count[str(ctx.channel.id)] = arg1
