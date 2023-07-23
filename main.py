@@ -4,12 +4,12 @@ import time
 import os.path
 import discord
 import datetime
-from keep_alive import keep_alive
 import requests
 import json
 from discord.ext import commands
 from discord.ext.commands import *
 from discord.ext import tasks
+from keep_alive import keep_alive
 
 # Startup and Variables
 ids = [
